@@ -31,12 +31,8 @@
                   </manifestEntries>
                 </transformer>
               </transformers>
-              <artifactSet>
-                <includes>
-                  <include>net.bytebuddy:byte-buddy</include>
-                  <include>net.bytebuddy:byte-buddy-agent</include>
-                </includes>
-              </artifactSet>
+              <createDependencyReducedPom>true</createDependencyReducedPom>
+              <minimizeJar>false</minimizeJar>
             </configuration>
           </execution>
         </executions>
