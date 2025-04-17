@@ -13,6 +13,8 @@ import static net.bytebuddy.matcher.ElementMatchers.*;
 
 public class AgentMain {
     public static void premain(String agentArgs, Instrumentation inst) {
+
+        System.out.println("[agent] gogo");
         AgentBuilder.Listener listener = new AgentBuilder.Listener.Adapter() {
             @Override
             public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader,
@@ -35,6 +37,7 @@ public class AgentMain {
                 .type(named("java.net.Socket"))
                 .transform((builder, typeDescription, classLoader, module, protectionDomain) ->
                         builder
+                                .visit(Advice.to(SocketInterceptor.class).on(named("connect")))
                                 .visit(Advice.to(GetInputStreamAdvice.class).on(named("getInputStream")))
                                 .visit(Advice.to(GetOutputStreamAdvice.class).on(named("getOutputStream")))
                 )
