@@ -19,8 +19,6 @@ public class AgentMain {
                 .transform((builder, typeDescription, classLoader, module, protectionDomain) ->
                         builder
                                 .visit(Advice.to(SocketInterceptor.class).on(named("connect")))
-                                .visit(Advice.to(GetInputStreamAdvice.class).on(named("getInputStream")))
-                                .visit(Advice.to(GetOutputStreamAdvice.class).on(named("getOutputStream")))
                 )
                 .installOn(inst);
     }
